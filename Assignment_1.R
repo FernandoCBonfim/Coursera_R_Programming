@@ -1,4 +1,7 @@
 rm(list=ls())
+
+#Part1
+
 pol_mean <- function(dir,pol,id=1:332){
    arquivos <- list.files(dir,full.names=TRUE)
   dados <- data.frame()
@@ -9,7 +12,21 @@ pol_mean <- function(dir,pol,id=1:332){
   }
   mean(dados[,p],na.rm = TRUE)
    }
-  
+#Part2
+
+complete <- function(dir,id=1:332)
+  {
+  arquivos <- list.files(dir,full.names=TRUE)
+  dados <- numeric()
+  for (i in id) 
+    {
+    a <- read.csv(arquivos[i])
+    dados[i] <- sum(!is.na(a$sulfate&a$nitrate))     
+    }
+  tabela <- data.frame()
+  tabela <- cbind(id,dados)
+  View(tabela)
+  }
 
 
-
+    
