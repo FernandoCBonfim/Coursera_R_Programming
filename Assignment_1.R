@@ -17,17 +17,15 @@ pol_mean <- function(dir,pol,id=1:332){
 complete <- function(dir,id=1:332)
   {
   arquivos <- list.files(dir,full.names=TRUE)
-  nobs <- numeric()
   tabela <- data.frame()
-  for (i in id) 
-    {
-    a <- read.csv(arquivos[i])
-    nobs[i] <- sum(!is.na(a$sulfate&a$nitrate)) 
-    }
-  tabela <- cbind(id,nobs)
-  
+  nobs <- numeric()
+   for (i in id){
+     
+    nobs[i] <-  nrow(na.omit(read.csv(arquivos[i])))
+   }
   View(nobs)
+  nobs <- na.omit(nobs)
+  tabela <- cbind(id,nobs)
+  tabela
   }
 
-
-    
