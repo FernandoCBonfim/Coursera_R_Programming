@@ -1,8 +1,9 @@
 rm(list=ls())
 library(dplyr)
+
 #Part1
 
-pol_mean <- function(dir,pol,id=1:332){
+pollutantmean <- function(dir,pol,id=1:332){
    arquivos <- list.files(dir,full.names=TRUE)
   dados <- data.frame()
   for (i in id) {
@@ -41,16 +42,26 @@ corr <- function(dir,threshold=0)
   x <- complete(dir)
   y <- which(x$nobs>threshold,x$id)
   z <- sum(x$nobs>threshold)
-  
+  if (z>0){
   for (i in 1:z) 
-  { 
+   { 
     a <- y[i]
     linhas <- na.omit(read.csv(arquivos[a]))
     dados[i] <- cor(linhas$sulfate,linhas$nitrate)
-  }
+   }
+  }else{dados<-numeric(0)}
   dados
-  
 }
+
+pollutantmean("specdata", "sulfate", 1:10)
+pollutantmean("specdata", "nitrate", 70:72)
+pollutantmean("specdata", "nitrate", 23)
+
+complete("specdata", 1)
+complete("specdata", c(2, 4, 8, 10, 12))
+complete("specdata", 30:25)
+complete("specdata", 3)
+
 
 cr <- corr("specdata", 150)
 head(cr)
