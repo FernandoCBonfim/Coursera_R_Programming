@@ -127,12 +127,3 @@ if (outcome=="heart attack"){
     resposta[order(resposta$state),]
 }else{}
 }
-
-
-
-
-
-
-
-
-
